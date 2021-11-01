@@ -2,7 +2,7 @@
 import React from 'react';
 import {  FlatList, StyleSheet, Text, View } from 'react-native';
 // Custom Components
-import BeachListItem from './BeachListItem'
+import BeachListItem from '../components/BeachListItem'
 // Utilities
 import GetData from '../static/api'
 

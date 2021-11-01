@@ -1,8 +1,8 @@
 export default function GetData() {
+    // API call would go here.
    for(let i=0; i < data.length; i++) {
       data[i]['id'] = i;
-   }
-    // API call would go here.
+   } 
     return data;
 }
 
