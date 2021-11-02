@@ -3,22 +3,16 @@ import { StyleSheet, Text, View } from "react-native";
 
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
+import BeachList from "../components/BeachList"
+
 const Tabs = createMaterialTopTabNavigator();
 
 function ScreenOne() {
   return (
     <Tabs.Navigator>
-      <Tabs.Screen name="Nearby" component={Tab1} />
+      <Tabs.Screen name="Nearby" component={BeachList} />
       <Tabs.Screen name="Pinned" component={Tab2} />
     </Tabs.Navigator>
-  );
-}
-
-function Tab1() {
-  return (
-    <View style={styles.screen}>
-      <Text>Tab 1</Text>
-    </View>
   );
 }
 
@@ -29,9 +23,6 @@ function Tab2() {
     </View>
   );
 }
-
-
-
 
 const styles = StyleSheet.create({
   screen: {

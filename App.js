@@ -19,7 +19,7 @@ const Root = createMaterialBottomTabNavigator();
 function HomescreenTabs() {
   return (
       <Root.Navigator
-      initialRouteName="Center"
+      initialRouteName="Beaches"
       activeColor="#ffffff"
       inactiveColor="#515151"
       shifting={true}
@@ -57,8 +57,6 @@ function HomescreenTabs() {
       </Root.Navigator>
   );
 }
-
-
 
 export default function App() {
   return (
