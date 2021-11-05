@@ -2,7 +2,11 @@ export default function GetData() {
     // API call would go here.
    for(let i=0; i < data.length; i++) {
       data[i]['id'] = i;
-   } 
+      data[i]['date'] = new Date(data[i]["date"] * 1000).toLocaleString();
+
+      console.log("------")
+      console.log(data[i]['date']);
+   }
     return data;
 }
 

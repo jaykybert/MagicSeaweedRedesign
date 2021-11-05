@@ -5,8 +5,8 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import BeachList from "../components/BeachList"
 import EmptyComponent from "../components/EmptyComponent"
 
-const Tabs = createMaterialTopTabNavigator();
 
+const Tabs = createMaterialTopTabNavigator();
 
 /** 
  * @function TopTabs
@@ -18,7 +18,7 @@ const Tabs = createMaterialTopTabNavigator();
 function TopTabs() {
   return (
     <Tabs.Navigator initialRouteName="Nearby">
-      <Tabs.Screen name="Map" component={EmptyComponent}   />
+      <Tabs.Screen name="Map" component={EmptyComponent} />
       <Tabs.Screen name="Nearby" component={BeachList} />
       <Tabs.Screen name="Pinned" component={BeachList} />
     </Tabs.Navigator>

@@ -1,6 +1,8 @@
+// React & Navigation
 import React from 'react';
 import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+
 
 const BeachListItem = ({dataItem, onPress}) => {
     return(
@@ -47,7 +49,7 @@ const BeachListItemStyle = StyleSheet.create({
     },
     pinIcon: {
         flexDirection: "row",
-        backgroundColor: "red",
+        backgroundColor: "#fff",
     }
 })
 
