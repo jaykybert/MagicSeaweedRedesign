@@ -1,9 +1,8 @@
-// React
+// React & Navigation
 import React from 'react';
-import {  FlatList, StyleSheet, View } from 'react-native';
-// Custom Components
-import BeachListItem from '../components/BeachListItem';
-
+import { FlatList, StyleSheet, View } from 'react-native';
+// Components
+import BeachListItem from './BeachListItem'
 // Utilities
 import GetLocationData from '../static/locationData'
 
@@ -15,18 +14,19 @@ function BeachListItemOnPress(beachId) {
     alert(`Beach ${beachId} pressed!`);
   }
 
-const BeachListScreen = ({ navigation, route }) => (
-
+const BeachList = ({ navigation, route, onPress }) => {
+  return (
     <View style={styles.container}>
         <FlatList style={styles.container}
         data={beachData}
         keyExtractor={(item) => item.id}
         renderItem={ ({item}) => (
           <BeachListItem dataItem = {item}
-          onPress={() => BeachListItemOnPress(item.id)}/>
+          onPress={() => navigation.push("Beach", { beach: beachData })}/>
         )}/>
-    </View>
-)
+    </View>)
+}
+
 
 const styles = StyleSheet.create({
     container: {
@@ -37,4 +37,4 @@ const styles = StyleSheet.create({
 
 
 
-export default BeachListScreen;
+export default BeachList;
