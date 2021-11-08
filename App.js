@@ -1,20 +1,22 @@
 // React & Navigation
-import React from 'react';
-import { StyleSheet } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import React from "react";
+import { StyleSheet } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
 // Components
-import HomescreenStack from './screens/HomescreenStack';
+import HomescreenStack from "./app/navigation/HomescreenStack";
 
+// TODO: MSW Logo - return to homescreen (custom header).
+// TODO: BeachListItem pin - style it.
 
-/** 
+/**
  *  @function App
  *  Entry point of application.
- *  Return a HomescreenStack inside a NavigationContainer.
+ *  @return a HomescreenStack inside a NavigationContainer.
  */
 export default function App() {
   return (
     <NavigationContainer style={AppStyles.container}>
-      <HomescreenStack/>
+      <HomescreenStack />
     </NavigationContainer>
   );
 }
@@ -22,6 +24,6 @@ export default function App() {
 const AppStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
 });
