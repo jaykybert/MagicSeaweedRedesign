@@ -20,14 +20,14 @@ const BeachTabs = createMaterialTopTabNavigator();
  */
 const BeachScreenTabs = ({ route }) => {
   return (
-    <BeachTabs.Navigator initialRouteName="Overview">
+    <BeachTabs.Navigator initialRouteName="Today">
       <BeachTabs.Screen
         name="Media"
-        children={() => <BeachMediaTab beachData={route.params.beachData} />}
+        children={() => <BeachMediaTab beachName={route.params.beachData} />}
       />
       <BeachTabs.Screen
-        name="Overview"
-        children={() => <BeachTodayTab beachData={route.params.beachData} />}
+        name="Today"
+        children={() => <BeachTodayTab beachName={route.params.beachData} />}
       />
       <BeachTabs.Screen name="Forecast" component={EmptyComponent} />
     </BeachTabs.Navigator>

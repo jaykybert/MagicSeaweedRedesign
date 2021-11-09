@@ -9,7 +9,7 @@ import { FlatList, StyleSheet, View } from "react-native";
 // Components
 import BeachListItem from "./BeachListItem";
 // Utilities
-import GetLocationData from "../static/locationData";
+import GetLocationData from "../scripts/locationData";
 
 let beachData = GetLocationData();
 

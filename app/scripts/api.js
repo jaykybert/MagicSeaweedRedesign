@@ -32,7 +32,6 @@ export function GetTideData() {
         x: data[i]["date"],
         y: data[i]["swell"]["components"]["primary"]["height"],
       });
-      console.log(data[i]["date"].getDate());
     } else {
       break;
     }

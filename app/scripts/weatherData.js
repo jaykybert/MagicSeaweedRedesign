@@ -5,19 +5,28 @@
  * @param {lon} - Longitude coordinate.
  * @return {data} - The data returned from the API request.
  */
-async function GetWeatherData(lat, lon) {
+function GetWeatherData(location) {
   const API_KEY = "65f61374e3ecc51440b6f1ddfccf8064";
 
+  /*
+  let resp = await fetch(
+    `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_KEY}&units=metric`
+  );
+
+  let data = await resp.json();
+  return data;
+
+  */
   fetch(
-    `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&appid=${API_KEY}&units=metric`
+    `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_KEY}&units=metric`
   ).then((response) => {
     if (response.ok) {
       response.json().then((data) => {
-        console.log(data);
+        console.log("Data received");
         return data;
       });
     } else {
-      console.log("error");
+      console.log(response.toString());
       return {};
     }
   });

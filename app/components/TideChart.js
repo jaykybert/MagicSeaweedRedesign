@@ -9,18 +9,19 @@ import { StyleSheet, View } from "react-native";
 // Charts
 import { VictoryChart, VictoryAxis, VictoryArea } from "victory-native";
 // Utilities
-import { GetTideData } from "../static/api";
+import { GetTideData } from "../scripts/api";
 
 const tideData = GetTideData();
 
 /**
+ * @function TideChart
  * A chart for displaying the tide against time for the current day (using dummy data.)
  * @returns TideChart Component
  */
 const TideChart = () => {
   return (
     <View style={TideChartStyles.chart}>
-      <VictoryChart height={200}>
+      <VictoryChart>
         <VictoryArea
           interpolation="natural"
           data={tideData}
