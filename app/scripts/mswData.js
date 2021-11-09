@@ -1,12 +1,11 @@
 /**
- * @function GetData
+ * @function GetDummyApiData
  * Create an id, date, and formatted date for every object in the array of data.
  * Then return the data.
  * @returns {data} - Dummy data with additional, generated data.
  */
-export function GetData() {
+export function GetDummyApiData() {
   // API call would go here.
-
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   for (let i = 0; i < data.length; i++) {
     data[i]["id"] = i;
@@ -24,12 +23,12 @@ export function GetData() {
  * @returns {tideData} - An array of objects containing an x (time) and a y (tide height) property.
  */
 export function GetTideData() {
-  tideData = [];
+  let tideData = [];
   for (let i = 0; i < data.length; i++) {
     data[i]["date"] = new Date(data[i]["timestamp"] * 1000);
     if (data[i]["date"].getDate() === data[0]["date"].getDate()) {
       tideData.push({
-        x: data[i]["date"],
+        x: data[i]["date"].getHours(),
         y: data[i]["swell"]["components"]["primary"]["height"],
       });
     } else {
@@ -37,6 +36,27 @@ export function GetTideData() {
     }
   }
   return tideData;
+}
+
+/**
+ * @function GetTemperatureData
+ *
+ * @returns {temperatureData}
+ */
+export function GetTemperatureData() {
+  let temperatureData = [];
+  for (let i = 0; i < data.length; i++) {
+    data[i]["date"] = new Date(data[i]["timestamp"] * 1000);
+    if (data[i]["date"].getDate() === data[0]["date"].getDate()) {
+      temperatureData.push({
+        x: data[i]["date"].getHours(),
+        y: data[i]["condition"]["temperature"],
+      });
+    } else {
+      break;
+    }
+  }
+  return temperatureData;
 }
 
 // ---------- API Dummy Data ---------- //

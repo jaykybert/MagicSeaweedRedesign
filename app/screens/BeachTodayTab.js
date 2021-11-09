@@ -5,15 +5,15 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 // Components
 import InfoCard from "../shared/InfoCard";
 import TideChart from "../components/TideChart";
+import TemperatureChart from "../components/TemperatureChart";
 // Utilites
-import { GetData } from "../scripts/api";
+import commonStyles from "../static/styles";
+import { GetDummyApiData } from "../scripts/mswData";
 import GetWeatherData from "../scripts/weatherData";
 import GetDummyWeatherData from "../scripts/dummyWeatherData";
 
-let data = GetData();
-let wDummyData = GetDummyWeatherData();
-
-let img = `${wDummyData["weather"][0]["icon"]}.png`;
+let mswData = GetDummyApiData();
+let weatherData = GetDummyWeatherData();
 
 /**
  * @function BeachTodayTab
@@ -24,81 +24,70 @@ let img = `${wDummyData["weather"][0]["icon"]}.png`;
  * @returns BeachTodayTab Component
  */
 const BeachTodayTab = ({ beachName }) => {
-  const [weatherData, setWeatherData] = useState();
-
-  console.log(img);
-
-  /*
-  useEffect(() => {
-    async function returnWeatherData() {
-      try {
-        let wData = GetWeatherData(beachName);
-        setWeatherData(wData);
-        console.log(weatherData);
-      } catch (error) {
-        console.warn(error);
-      }
-    }
-    returnWeatherData();
-  }, []);
-  */
-
   return (
     <ScrollView>
       <View>
-        <Text style={BeachTodayTabStyles.bigText}>{beachName}</Text>
+        <Text style={BeachTodayTabStyles.cardLargeText}>{beachName}</Text>
 
         <View style={BeachTodayTabStyles.adjacentCards}>
           <InfoCard>
-            <Text style={BeachTodayTabStyles.heading}>Weather</Text>
+            <Text style={commonStyles.cardHeading}>Weather</Text>
 
             <Image
               source={require(`../assets/weatherIcons/04n.png`)}
               style={{ width: 100, height: 100 }}
             />
 
-            <Text style={BeachTodayTabStyles.smallText}>
-              L: {Math.floor(wDummyData["main"]["temp_min"])} H:{" "}
-              {Math.ceil(wDummyData["main"]["temp_max"])}
+            <Text style={BeachTodayTabStyles.subHeading}>
+              {weatherData["weather"][0]["description"]}
             </Text>
 
-            <View style={BeachTodayTabStyles.sameRow}>
-              <Text style={BeachTodayTabStyles.bigText}>
-                {Math.round(wDummyData["main"]["temp"])}
+            <View style={BeachTodayTabStyles.formatUnits}>
+              <Text style={BeachTodayTabStyles.cardLargeText}>
+                {Math.round(weatherData["main"]["temp"])}
               </Text>
-              <Text>°C</Text>
+              <Text style={BeachTodayTabStyles}>°C</Text>
             </View>
+
+            <Text style={BeachTodayTabStyles.subHeading}>
+              L: {Math.floor(weatherData["main"]["temp_min"])} H:{" "}
+              {Math.ceil(weatherData["main"]["temp_max"])}
+            </Text>
           </InfoCard>
 
           <InfoCard>
-            <Text style={BeachTodayTabStyles.heading}>Wind</Text>
+            <Text style={commonStyles.cardHeading}>Wind</Text>
             <View>
               <MaterialCommunityIcons
                 name="arrow-down-bold"
                 size={100}
                 color="#0527cb"
                 style={{
-                  transform: [{ rotate: `${data[0]["wind"]["direction"]}deg` }],
+                  transform: [
+                    { rotate: `${mswData[0]["wind"]["direction"]}deg` },
+                  ],
                 }}
               />
 
-              <Text style={BeachTodayTabStyles.smallText}>
-                {data[0]["wind"]["compassDirection"]} |{" "}
-                {data[0]["wind"]["direction"]}°
+              <Text style={BeachTodayTabStyles.subHeading}>
+                {mswData[0]["wind"]["compassDirection"]} |{" "}
+                {mswData[0]["wind"]["direction"]}°
               </Text>
 
-              <Text style={BeachTodayTabStyles.bigText}>
-                {data[0]["wind"]["speed"]}
-              </Text>
+              <View style={BeachTodayTabStyles.formatUnits}>
+                <Text style={BeachTodayTabStyles.cardLargeText}>
+                  {mswData[0]["wind"]["speed"]}
+                </Text>
 
-              <Text style={BeachTodayTabStyles.smallText}>
-                {data[0]["wind"]["unit"]}
-              </Text>
+                <Text style={BeachTodayTabStyles}>
+                  {mswData[0]["wind"]["unit"]}
+                </Text>
+              </View>
             </View>
           </InfoCard>
 
           <InfoCard>
-            <Text style={BeachTodayTabStyles.heading}>Swell</Text>
+            <Text style={commonStyles.cardHeading}>Swell</Text>
             <View>
               <MaterialCommunityIcons
                 name="arrow-down-bold"
@@ -108,28 +97,35 @@ const BeachTodayTab = ({ beachName }) => {
                   transform: [
                     {
                       rotate: `${Math.round(
-                        data[0]["swell"]["components"]["primary"]["direction"]
+                        mswData[0]["swell"]["components"]["primary"][
+                          "direction"
+                        ]
                       )}deg`,
                     },
                   ],
                 }}
               />
-              <Text style={BeachTodayTabStyles.smallText}>
-                {data[0]["swell"]["components"]["primary"]["compassDirection"]}{" "}
+              <Text style={BeachTodayTabStyles.subHeading}>
+                {
+                  mswData[0]["swell"]["components"]["primary"][
+                    "compassDirection"
+                  ]
+                }{" "}
                 |{" "}
                 {Math.round(
-                  data[0]["swell"]["components"]["primary"]["direction"]
+                  mswData[0]["swell"]["components"]["primary"]["direction"]
                 )}
                 °
               </Text>
+              <View style={BeachTodayTabStyles.formatUnits}>
+                <Text style={BeachTodayTabStyles.cardLargeText}>
+                  {mswData[0]["swell"]["components"]["primary"]["height"]}
+                </Text>
+                <Text> {mswData[0]["swell"]["unit"]}</Text>
+              </View>
 
-              <Text style={BeachTodayTabStyles.mediumText}>
-                {data[0]["swell"]["components"]["primary"]["height"]}
-                {data[0]["swell"]["unit"]}
-              </Text>
-
-              <Text style={BeachTodayTabStyles.smallText}>
-                @{data[0]["swell"]["components"]["primary"]["period"]}s
+              <Text style={BeachTodayTabStyles.subHeading}>
+                @{mswData[0]["swell"]["components"]["primary"]["period"]}s
               </Text>
             </View>
           </InfoCard>
@@ -140,36 +136,35 @@ const BeachTodayTab = ({ beachName }) => {
             <TideChart />
           </InfoCard>
         </View>
+
+        <View>
+          <InfoCard>
+            <TemperatureChart />
+          </InfoCard>
+        </View>
       </View>
     </ScrollView>
   );
 };
 
 const BeachTodayTabStyles = StyleSheet.create({
-  heading: {
+  subHeading: {
+    marginTop: -5,
     textAlign: "center",
-    fontWeight: "bold",
-  },
-  smallText: {
-    marginTop: -5, // Bring text closer to arrow.
-    textAlign: "center",
-    fontSize: 12,
+    fontSize: 16,
     fontStyle: "italic",
   },
-  bigText: {
+  cardLargeText: {
     fontWeight: "bold",
     textAlign: "center",
     fontSize: 32,
   },
   adjacentCards: {
+    width: "100%",
     flexDirection: "row",
     justifyContent: "center",
   },
-  mediumText: {
-    textAlign: "center",
-    fontSize: 26,
-  },
-  sameRow: {
+  formatUnits: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",

@@ -1,18 +1,25 @@
 /** @file TideChart.js
- * Contains the TideChart component, relevant styles, and the
+ * Contains the TideChart component and the
  * function call for getting the (dummy) tide data.
  */
 
 // React
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { Text, View } from "react-native";
 // Charts
-import { VictoryChart, VictoryAxis, VictoryArea } from "victory-native";
+import {
+  VictoryArea,
+  VictoryAxis,
+  VictoryChart,
+  VictoryTheme,
+} from "victory-native";
 // Utilities
-import { GetTideData } from "../scripts/api";
+import commonStyles from "../static/styles";
+import { GetTideData } from "../scripts/mswData";
 
 const tideData = GetTideData();
 
+let formattedTime = [3, 6, 9, 12, 15, 18, 21];
 /**
  * @function TideChart
  * A chart for displaying the tide against time for the current day (using dummy data.)
@@ -20,35 +27,35 @@ const tideData = GetTideData();
  */
 const TideChart = () => {
   return (
-    <View style={TideChartStyles.chart}>
-      <VictoryChart>
+    <View>
+      <Text style={commonStyles.cardHeading}>Tide (metres)</Text>
+      <VictoryChart
+        height={225}
+        style={{
+          background: {
+            fill: "#f0fcfe",
+          },
+        }}
+      >
         <VictoryArea
           interpolation="natural"
           data={tideData}
           style={{ data: { fill: "#0527cb" } }}
         />
 
-        <VictoryAxis dependentAxis label="Tide (m)" />
+        <VictoryAxis dependentAxis />
 
         <VictoryAxis
+          crossAxis
           scale={{ x: "time" }}
           fixLabelOverlap={true}
           standalone={false}
-          label="Time"
+          label="Time (hour)"
+          tickValues={formattedTime}
         />
       </VictoryChart>
     </View>
   );
 };
-
-const TideChartStyles = StyleSheet.create({
-  chart: {
-    marginLeft: 50,
-    justifyContent: "center",
-  },
-  bigText: {
-    fontSize: 25,
-  },
-});
 
 export default TideChart;
