@@ -7,12 +7,7 @@
 import React from "react";
 import { Text, View } from "react-native";
 // Charts
-import {
-  VictoryArea,
-  VictoryAxis,
-  VictoryChart,
-  VictoryTheme,
-} from "victory-native";
+import { VictoryArea, VictoryAxis, VictoryChart } from "victory-native";
 // Utilities
 import commonStyles from "../static/styles";
 import { GetTideData } from "../scripts/mswData";
@@ -33,7 +28,7 @@ const TideChart = () => {
         height={225}
         style={{
           background: {
-            fill: "#f0fcfe",
+            fill: "#d4f2ff",
           },
         }}
       >

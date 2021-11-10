@@ -58,6 +58,7 @@ const Styles = StyleSheet.create({
     backgroundColor: "#fff",
     height: 85,
     paddingLeft: 10,
+    borderRadius: 10,
   },
   heading: {
     color: "#262727",

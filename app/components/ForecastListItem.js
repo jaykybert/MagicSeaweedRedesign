@@ -4,8 +4,10 @@
 
 // React
 import React from "react";
-import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+// Utilities
+import HourlyForecastListItem from "./HourlyForecastListItem";
 
 /**
  * Represents a forecast for a particular day. Found inside BeachForecastTab.
@@ -14,12 +16,27 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
  * @returns ForecastListItem Component
  */
 const ForecastListItem = ({ forecastData, onPress }) => {
-  return <View style={Styles.container}></View>;
-};
+  return (
+    <View style={Styles.container}>
+      <View style={Styles.rowItem}>
+        <Text style={Styles.heading}>{forecastData["day"]}</Text>
+      </View>
 
-function onPinPress() {
-  alert("Beach Pinned!\n(Not Implemented)");
-}
+      <View>
+        <FlatList
+          data={forecastData["forecast"]}
+          keyExtractor={(item) => item.hour}
+          renderItem={({ item }) => (
+            <HourlyForecastListItem
+              forecastHour={item}
+              onPress={() => alert("pressed")}
+            />
+          )}
+        />
+      </View>
+    </View>
+  );
+};
 
 const Styles = StyleSheet.create({
   container: {
@@ -28,21 +45,17 @@ const Styles = StyleSheet.create({
   },
   rowItem: {
     justifyContent: "center",
-    backgroundColor: "#fff",
-    height: 85,
+    backgroundColor: "#0527cb",
+
     paddingLeft: 10,
   },
   heading: {
-    color: "#262727",
+    color: "#fff",
     fontSize: 22,
     fontWeight: "500",
   },
   distance: {
     fontStyle: "italic",
-  },
-  pinIcon: {
-    backgroundColor: "#fff",
-    flexDirection: "row-reverse",
   },
 });
 

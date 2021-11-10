@@ -25,13 +25,13 @@ let weatherData = GetDummyWeatherData();
  */
 const BeachTodayTab = ({ beachName }) => {
   return (
-    <ScrollView>
+    <ScrollView style={{ backgroundColor: "#d4f2ff" }}>
       <View>
-        <Text style={Styles.cardLargeText}>
+        <Text style={todayStyles.cardLargeText}>
           {beachName}, {mswData[0]["day"]}
         </Text>
 
-        <View style={Styles.adjacentCards}>
+        <View style={todayStyles.adjacentCards}>
           <InfoCard>
             <Text style={commonStyles.cardHeading}>Weather</Text>
 
@@ -44,11 +44,11 @@ const BeachTodayTab = ({ beachName }) => {
               {weatherData["weather"][0]["description"]}
             </Text>
 
-            <View style={Styles.formatUnits}>
-              <Text style={Styles.cardLargeText}>
+            <View style={todayStyles.formatUnits}>
+              <Text style={todayStyles.cardLargeText}>
                 {Math.round(weatherData["main"]["temp"])}
               </Text>
-              <Text style={Styles}>°C</Text>
+              <Text style={todayStyles}>°C</Text>
             </View>
 
             <Text style={commonStyles.subHeading}>
@@ -76,12 +76,12 @@ const BeachTodayTab = ({ beachName }) => {
                 {mswData[0]["wind"]["direction"]}°
               </Text>
 
-              <View style={Styles.formatUnits}>
-                <Text style={Styles.cardLargeText}>
+              <View style={todayStyles.formatUnits}>
+                <Text style={todayStyles.cardLargeText}>
                   {mswData[0]["wind"]["speed"]}
                 </Text>
 
-                <Text style={Styles}>{mswData[0]["wind"]["unit"]}</Text>
+                <Text style={todayStyles}>{mswData[0]["wind"]["unit"]}</Text>
               </View>
             </View>
           </InfoCard>
@@ -117,8 +117,8 @@ const BeachTodayTab = ({ beachName }) => {
                 )}
                 °
               </Text>
-              <View style={Styles.formatUnits}>
-                <Text style={Styles.cardLargeText}>
+              <View style={todayStyles.formatUnits}>
+                <Text style={todayStyles.cardLargeText}>
                   {mswData[0]["swell"]["components"]["primary"]["height"]}
                 </Text>
                 <Text> {mswData[0]["swell"]["unit"]}</Text>
@@ -131,34 +131,29 @@ const BeachTodayTab = ({ beachName }) => {
           </InfoCard>
         </View>
 
-        <View>
-          <InfoCard>
-            <TideChart />
-          </InfoCard>
-        </View>
+        <InfoCard>
+          <TideChart />
+        </InfoCard>
 
-        <View>
-          <InfoCard>
-            <WindChart />
-          </InfoCard>
-        </View>
+        <InfoCard>
+          <WindChart />
+        </InfoCard>
 
-        <View>
-          <InfoCard>
-            <View style={Styles.advertisement}></View>
-            <Text style={{ alignItems: "center", justifyContent: "center" }}>
-              Ad Space
-            </Text>
-          </InfoCard>
-        </View>
+        <InfoCard>
+          <View style={todayStyles.advertisement}></View>
+          <Text style={{ alignItems: "center", justifyContent: "center" }}>
+            Ad Space
+          </Text>
+        </InfoCard>
       </View>
     </ScrollView>
   );
 };
 
-const Styles = StyleSheet.create({
+const todayStyles = StyleSheet.create({
   advertisement: {
-    height: 200,
+    alignItems: "center",
+    height: 150,
   },
   cardLargeText: {
     fontWeight: "bold",

@@ -37,6 +37,9 @@ const WindChart = () => {
         theme={VictoryTheme.material}
         minDomain={{ y: minSpeed - 1 }}
         maxDomain={{ y: maxSpeed + 1 }}
+        style={{
+          background: { fill: "#d4f2ff" },
+        }}
       >
         <VictoryLine
           data={windData}

@@ -13,7 +13,7 @@ export function GetDummyApiData() {
   for (let i = 0; i < data.length; i++) {
     data[i]["id"] = i;
     data[i]["date"] = new Date(data[i]["timestamp"] * 1000);
-    data[i]["day"] = `${days[data[i]["date"].getDay()]}-${data[i][
+    data[i]["day"] = `${days[data[i]["date"].getDay()]} ${data[i][
       "date"
     ].getDate()}`;
   }
@@ -37,7 +37,6 @@ export function GetTideData() {
     } else {
       break;
     }
-    console.log(tideData);
   }
   return tideData;
 }
@@ -69,27 +68,24 @@ export function GetWindData() {
  * @return {forecastData}
  */
 export function GetForecastData() {
-  // loop
-  // check for first day
-  // ignore
-  //if different
-  // add it
-  // set current day to this day
-  // if different to current day
-  // add new object
   let forecastData = [];
   let prevDay;
 
-  let hourlyForecast = [];
-
   for (let i = 0; i < data.length; i++) {
     data[i]["date"] = new Date(data[i]["timestamp"] * 1000);
-    data[i]["day"] = `${days[data[i]["date"].getDay()]}-${data[i][
+    data[i]["day"] = `${days[data[i]["date"].getDay()]} ${data[i][
       "date"
     ].getDate()}`;
 
     // Ignore 'Today'
     if (data[i]["day"] === data[0]["day"]) {
+      continue;
+    }
+
+    let hour = data[i]["date"].getHours();
+
+    if (hour < 4 || hour > 21) {
+      // Ignore anything before 4am or after 11pm.
       continue;
     }
 
@@ -99,20 +95,32 @@ export function GetForecastData() {
         day: data[i]["day"],
         forecast: [],
       });
+      forecastData[forecastData.length - 1]["id"] = forecastData.length - 1;
     }
 
     forecastData[forecastData.length - 1]["forecast"].push({
-      hour: data[i]["date"].getHours(),
-      wind: "7mph",
+      hour: hour,
+      wind: {
+        speed: data[i]["wind"]["speed"],
+        direction: data[i]["wind"]["direction"],
+        compassDirection: data[i]["wind"]["compassDirection"],
+        unit: data[i]["wind"]["unit"],
+      },
+      swell: {
+        height: data[i]["swell"]["components"]["primary"]["height"].toFixed(1),
+        period: data[i]["swell"]["components"]["primary"]["period"],
+        direction: data[i]["swell"]["components"]["primary"]["direction"],
+        compassDirection:
+          data[i]["swell"]["components"]["primary"]["compassDirection"],
+        unit: data[i]["swell"]["unit"],
+      },
+      condition: {
+        temperature: data[i]["condition"]["temperature"],
+        unit: data[i]["condition"]["unit"],
+      },
     });
-
-    console.log("DAY: " + data[i]["day"]);
-    console.log("\tHOUR: " + data[i]["date"].getHours());
-
     prevDay = data[i]["day"];
   }
-  console.log(forecastData);
-  console.log("---------------------------------");
   return forecastData;
 }
 
