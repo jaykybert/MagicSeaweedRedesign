@@ -17,24 +17,24 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
  */
 const BeachListItem = ({ beachItem, onPress }) => {
   return (
-    <View>
+    <View style={Styles.container}>
       <TouchableHighlight
-        style={BeachListItemStyle.rowItem}
+        style={Styles.rowItem}
         activeOpacity={0.4}
-        underlayColor="#FFFFFF"
+        underlayColor="#fff"
         onPress={onPress}
       >
         <View>
-          <Text style={BeachListItemStyle.heading}>
-            {beachItem["name"].toUpperCase()}
-          </Text>
-          <Text style={BeachListItemStyle.subHeading}>
+          <Text style={Styles.heading}>{beachItem["name"].toUpperCase()}</Text>
+          <Text style={Styles.distance}>
             {beachItem["distanceMiles"]} miles
           </Text>
 
           <TouchableHighlight
-            style={BeachListItemStyle.pinIcon}
-            onPress={testPress}
+            style={Styles.pinIcon}
+            activeOpacity={0.4}
+            underlayColor="#fff"
+            onPress={onPinPress}
           >
             <MaterialCommunityIcons name="pin" size={20} />
           </TouchableHighlight>
@@ -44,28 +44,32 @@ const BeachListItem = ({ beachItem, onPress }) => {
   );
 };
 
-function testPress() {
-  alert("pin press");
+function onPinPress() {
+  alert("Beach Pinned!\n(Not Implemented)");
 }
 
-const BeachListItemStyle = StyleSheet.create({
+const Styles = StyleSheet.create({
+  container: {
+    marginHorizontal: 10,
+    marginTop: 5,
+  },
   rowItem: {
-    marginBottom: 5,
-    flexDirection: "row",
-    backgroundColor: "#ffffff",
-    width: "100%",
-    height: 90,
+    justifyContent: "center",
+    backgroundColor: "#fff",
+    height: 85,
+    paddingLeft: 10,
   },
   heading: {
     color: "#262727",
     fontSize: 22,
+    fontWeight: "500",
   },
-  subHeading: {
+  distance: {
     fontStyle: "italic",
   },
   pinIcon: {
-    flexDirection: "row",
     backgroundColor: "#fff",
+    flexDirection: "row-reverse",
   },
 });
 

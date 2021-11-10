@@ -11,9 +11,9 @@ const Root = createMaterialBottomTabNavigator();
 /**
  * @function BottomTabs
  * Navigation component nested within HomescreenStack. Contains 3 screens:
- *    > Account (left) - using EmptyComponent
+ *    > News (left) - using EmptyComponent
  *    > TopTabs (centre)
- *    > Settings (right) - using EmptyComponent
+ *    > Account (right) - using EmptyComponent
  *
  * @returns BottomTabs Component
  */
@@ -28,13 +28,17 @@ const BottomTabs = () => {
       barStyle={{ backgroundColor: "#67aaee" }}
     >
       <Root.Screen
-        name="Account"
+        name="News"
         component={EmptyComponent}
         options={{
           tabBarColor: "#3d94ee",
-          tabBarLabel: "Account",
+          tabBarLabel: "News",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="account" color={color} size={24} />
+            <MaterialCommunityIcons
+              name="text-box-multiple"
+              color={color}
+              size={24}
+            />
           ),
         }}
       />
@@ -52,14 +56,14 @@ const BottomTabs = () => {
       />
 
       <Root.Screen
-        name="Settings"
+        name="Account"
         component={EmptyComponent}
         backgroundColor="#be7474"
         options={{
           tabBarColor: "#0b529c",
-          tabBarLabel: "Settings",
+          tabBarLabel: "Account",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="cog" color={color} size={24} />
+            <MaterialCommunityIcons name="account" color={color} size={24} />
           ),
         }}
       />

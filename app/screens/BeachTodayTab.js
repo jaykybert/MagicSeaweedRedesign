@@ -5,7 +5,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 // Components
 import InfoCard from "../shared/InfoCard";
 import TideChart from "../components/TideChart";
-import TemperatureChart from "../components/TemperatureChart";
+import WindChart from "../components/WindChart";
 // Utilites
 import commonStyles from "../static/styles";
 import { GetDummyApiData } from "../scripts/mswData";
@@ -20,16 +20,18 @@ let weatherData = GetDummyWeatherData();
  * Screen for displaying information about the beach today.
  * Contains temperature, wind, and surf information.
  *
- * @param {beachName} - The beach name.
+ * @param {beachName}
  * @returns BeachTodayTab Component
  */
 const BeachTodayTab = ({ beachName }) => {
   return (
     <ScrollView>
       <View>
-        <Text style={BeachTodayTabStyles.cardLargeText}>{beachName}</Text>
+        <Text style={Styles.cardLargeText}>
+          {beachName}, {mswData[0]["day"]}
+        </Text>
 
-        <View style={BeachTodayTabStyles.adjacentCards}>
+        <View style={Styles.adjacentCards}>
           <InfoCard>
             <Text style={commonStyles.cardHeading}>Weather</Text>
 
@@ -38,18 +40,18 @@ const BeachTodayTab = ({ beachName }) => {
               style={{ width: 100, height: 100 }}
             />
 
-            <Text style={BeachTodayTabStyles.subHeading}>
+            <Text style={commonStyles.subHeading}>
               {weatherData["weather"][0]["description"]}
             </Text>
 
-            <View style={BeachTodayTabStyles.formatUnits}>
-              <Text style={BeachTodayTabStyles.cardLargeText}>
+            <View style={Styles.formatUnits}>
+              <Text style={Styles.cardLargeText}>
                 {Math.round(weatherData["main"]["temp"])}
               </Text>
-              <Text style={BeachTodayTabStyles}>°C</Text>
+              <Text style={Styles}>°C</Text>
             </View>
 
-            <Text style={BeachTodayTabStyles.subHeading}>
+            <Text style={commonStyles.subHeading}>
               L: {Math.floor(weatherData["main"]["temp_min"])} H:{" "}
               {Math.ceil(weatherData["main"]["temp_max"])}
             </Text>
@@ -69,19 +71,17 @@ const BeachTodayTab = ({ beachName }) => {
                 }}
               />
 
-              <Text style={BeachTodayTabStyles.subHeading}>
+              <Text style={commonStyles.subHeading}>
                 {mswData[0]["wind"]["compassDirection"]} |{" "}
                 {mswData[0]["wind"]["direction"]}°
               </Text>
 
-              <View style={BeachTodayTabStyles.formatUnits}>
-                <Text style={BeachTodayTabStyles.cardLargeText}>
+              <View style={Styles.formatUnits}>
+                <Text style={Styles.cardLargeText}>
                   {mswData[0]["wind"]["speed"]}
                 </Text>
 
-                <Text style={BeachTodayTabStyles}>
-                  {mswData[0]["wind"]["unit"]}
-                </Text>
+                <Text style={Styles}>{mswData[0]["wind"]["unit"]}</Text>
               </View>
             </View>
           </InfoCard>
@@ -105,7 +105,7 @@ const BeachTodayTab = ({ beachName }) => {
                   ],
                 }}
               />
-              <Text style={BeachTodayTabStyles.subHeading}>
+              <Text style={commonStyles.subHeading}>
                 {
                   mswData[0]["swell"]["components"]["primary"][
                     "compassDirection"
@@ -117,14 +117,14 @@ const BeachTodayTab = ({ beachName }) => {
                 )}
                 °
               </Text>
-              <View style={BeachTodayTabStyles.formatUnits}>
-                <Text style={BeachTodayTabStyles.cardLargeText}>
+              <View style={Styles.formatUnits}>
+                <Text style={Styles.cardLargeText}>
                   {mswData[0]["swell"]["components"]["primary"]["height"]}
                 </Text>
                 <Text> {mswData[0]["swell"]["unit"]}</Text>
               </View>
 
-              <Text style={BeachTodayTabStyles.subHeading}>
+              <Text style={commonStyles.subHeading}>
                 @{mswData[0]["swell"]["components"]["primary"]["period"]}s
               </Text>
             </View>
@@ -139,7 +139,16 @@ const BeachTodayTab = ({ beachName }) => {
 
         <View>
           <InfoCard>
-            <TemperatureChart />
+            <WindChart />
+          </InfoCard>
+        </View>
+
+        <View>
+          <InfoCard>
+            <View style={Styles.advertisement}></View>
+            <Text style={{ alignItems: "center", justifyContent: "center" }}>
+              Ad Space
+            </Text>
           </InfoCard>
         </View>
       </View>
@@ -147,17 +156,14 @@ const BeachTodayTab = ({ beachName }) => {
   );
 };
 
-const BeachTodayTabStyles = StyleSheet.create({
-  subHeading: {
-    marginTop: -5,
-    textAlign: "center",
-    fontSize: 16,
-    fontStyle: "italic",
+const Styles = StyleSheet.create({
+  advertisement: {
+    height: 200,
   },
   cardLargeText: {
     fontWeight: "bold",
     textAlign: "center",
-    fontSize: 32,
+    fontSize: 30,
   },
   adjacentCards: {
     width: "100%",

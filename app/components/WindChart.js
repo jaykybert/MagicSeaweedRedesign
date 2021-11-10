@@ -1,6 +1,6 @@
-/** @file TemperatureChart.js
- * Contains the Temperature component and the
- * function call for getting the (dummy) temperature data.
+/** @file WindChart.js
+ * Contains the WindChart component and the
+ * function call for getting the (dummy) wind data.
  */
 
 // React
@@ -15,32 +15,33 @@ import {
 } from "victory-native";
 // Utilities
 import commonStyles from "../static/styles";
-import { GetTemperatureData } from "../scripts/mswData";
+import { GetWindData } from "../scripts/mswData";
 
-const temperatureData = GetTemperatureData();
-const maxTemp = Math.max(...temperatureData.map((datum) => datum.y));
-const minTemp = Math.min(...temperatureData.map((datum) => datum.y));
+const windData = GetWindData();
+// Min and max wind speed used to better scale the chart.
+const maxSpeed = Math.max(...windData.map((datum) => datum.y));
+const minSpeed = Math.min(...windData.map((datum) => datum.y));
 
 let formattedTime = [3, 6, 9, 12, 15, 18, 21];
 /**
- * @function TemperatureChart
+ * @function WindChart
  * A chart for displaying the temperature against time for the current day (using dummy data.)
- * @returns TemperatureChart Component
+ * @returns WindChart Component
  */
-const TemperatureChart = () => {
+const WindChart = () => {
   return (
     <View>
-      <Text style={commonStyles.cardHeading}>Temperature (°C)</Text>
+      <Text style={commonStyles.cardHeading}>Wind Speed (mph)</Text>
       <VictoryChart
         height={250}
         theme={VictoryTheme.material}
-        minDomain={{ y: minTemp - 1 }}
-        maxDomain={{ y: maxTemp + 1 }}
+        minDomain={{ y: minSpeed - 1 }}
+        maxDomain={{ y: maxSpeed + 1 }}
       >
         <VictoryLine
-          data={temperatureData}
+          data={windData}
           style={{
-            data: { stroke: "#c43a31" },
+            data: { stroke: "#242424" },
           }}
           interpolation="natural"
         />
@@ -59,4 +60,4 @@ const TemperatureChart = () => {
   );
 };
 
-export default TemperatureChart;
+export default WindChart;

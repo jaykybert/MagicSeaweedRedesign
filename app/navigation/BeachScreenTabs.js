@@ -5,6 +5,7 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import EmptyComponent from "../shared/EmptyComponent";
 import BeachMediaTab from "../screens/BeachMediaTab";
 import BeachTodayTab from "../screens/BeachTodayTab";
+import BeachForecastTab from "../screens/BeachForecastTab";
 
 const BeachTabs = createMaterialTopTabNavigator();
 
@@ -29,7 +30,10 @@ const BeachScreenTabs = ({ route }) => {
         name="Today"
         children={() => <BeachTodayTab beachName={route.params.beachData} />}
       />
-      <BeachTabs.Screen name="Forecast" component={EmptyComponent} />
+      <BeachTabs.Screen
+        name="Forecast"
+        children={() => <BeachForecastTab beachName={route.params.beachData} />}
+      />
     </BeachTabs.Navigator>
   );
 };

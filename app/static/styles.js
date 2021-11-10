@@ -16,6 +16,12 @@ const commonStyles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
+  subHeading: {
+    marginTop: -5,
+    textAlign: "center",
+    fontSize: 16,
+    fontStyle: "italic",
+  },
 });
 
 export default commonStyles;

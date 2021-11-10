@@ -1,3 +1,7 @@
+import { PROVIDER_GOOGLE } from "react-native-maps";
+
+const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
 /**
  * @function GetDummyApiData
  * Create an id, date, and formatted date for every object in the array of data.
@@ -6,7 +10,6 @@
  */
 export function GetDummyApiData() {
   // API call would go here.
-  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   for (let i = 0; i < data.length; i++) {
     data[i]["id"] = i;
     data[i]["date"] = new Date(data[i]["timestamp"] * 1000);
@@ -34,29 +37,83 @@ export function GetTideData() {
     } else {
       break;
     }
+    console.log(tideData);
   }
   return tideData;
 }
 
 /**
- * @function GetTemperatureData
+ * @function GetWindData
  *
- * @returns {temperatureData}
+ * @returns {windData}
  */
-export function GetTemperatureData() {
-  let temperatureData = [];
+export function GetWindData() {
+  let windData = [];
   for (let i = 0; i < data.length; i++) {
     data[i]["date"] = new Date(data[i]["timestamp"] * 1000);
     if (data[i]["date"].getDate() === data[0]["date"].getDate()) {
-      temperatureData.push({
+      windData.push({
         x: data[i]["date"].getHours(),
-        y: data[i]["condition"]["temperature"],
+        y: data[i]["wind"]["speed"],
       });
     } else {
       break;
     }
   }
-  return temperatureData;
+  return windData;
+}
+
+/**
+ * @function GetForecastData
+ *
+ * @return {forecastData}
+ */
+export function GetForecastData() {
+  // loop
+  // check for first day
+  // ignore
+  //if different
+  // add it
+  // set current day to this day
+  // if different to current day
+  // add new object
+  let forecastData = [];
+  let prevDay;
+
+  let hourlyForecast = [];
+
+  for (let i = 0; i < data.length; i++) {
+    data[i]["date"] = new Date(data[i]["timestamp"] * 1000);
+    data[i]["day"] = `${days[data[i]["date"].getDay()]}-${data[i][
+      "date"
+    ].getDate()}`;
+
+    // Ignore 'Today'
+    if (data[i]["day"] === data[0]["day"]) {
+      continue;
+    }
+
+    // Different Day - Create new object.
+    if (data[i]["day"] !== prevDay) {
+      forecastData.push({
+        day: data[i]["day"],
+        forecast: [],
+      });
+    }
+
+    forecastData[forecastData.length - 1]["forecast"].push({
+      hour: data[i]["date"].getHours(),
+      wind: "7mph",
+    });
+
+    console.log("DAY: " + data[i]["day"]);
+    console.log("\tHOUR: " + data[i]["date"].getHours());
+
+    prevDay = data[i]["day"];
+  }
+  console.log(forecastData);
+  console.log("---------------------------------");
+  return forecastData;
 }
 
 // ---------- API Dummy Data ---------- //
