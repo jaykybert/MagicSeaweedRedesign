@@ -16,7 +16,7 @@ import {
 } from "victory-native";
 // Utilities
 import commonStyles from "../static/commonStyles";
-import { GetWindData } from "../scripts/mswData";
+import { GetWindData } from "../static/mswData";
 
 const windData = GetWindData();
 // Min and max wind speed used to better scale the chart.

@@ -10,7 +10,7 @@ import { FlatList, StyleSheet, View } from "react-native";
 // Components
 import DailyForecastListItem from "./DailyForecastListItem";
 // Utilities
-import { GetForecastData } from "../scripts/mswData";
+import { GetForecastData } from "../static/mswData";
 
 const forecastData = GetForecastData();
 

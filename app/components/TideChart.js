@@ -11,7 +11,7 @@ import { Text, View } from "react-native";
 import { VictoryArea, VictoryChart, VictoryAxis } from "victory-native";
 // Utilities
 import commonStyles from "../static/commonStyles";
-import { GetTideData } from "../scripts/mswData";
+import { GetTideData } from "../static/mswData";
 
 const tideData = GetTideData();
 

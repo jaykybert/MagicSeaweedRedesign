@@ -9,13 +9,14 @@ import React from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 // Components
+import ConditionsOverview from "../components/ConditionsOverview";
 import InfoCard from "../shared/InfoCard";
 import TideChart from "../components/TideChart";
 import WindChart from "../components/WindChart";
 // Utilites
 import commonStyles from "../static/commonStyles";
-import { GetMSWApiData } from "../scripts/mswData";
-import GetDummyWeatherData from "../scripts/dummyWeatherData";
+import GetDummyWeatherData from "../static/dummyWeatherData";
+import { GetMSWApiData } from "../static/mswData";
 
 let mswData = GetMSWApiData();
 let weatherData = GetDummyWeatherData();
@@ -36,6 +37,10 @@ const BeachTodayTab = ({ beachName }) => {
         <Text style={styles.cardLargeText}>
           {beachName}, {mswData[0]["day"]}
         </Text>
+
+        <InfoCard>
+          <ConditionsOverview />
+        </InfoCard>
 
         <View style={styles.adjacentCards}>
           <InfoCard>
@@ -161,7 +166,6 @@ const styles = StyleSheet.create({
     height: 150,
   },
   cardLargeText: {
-    fontWeight: "bold",
     textAlign: "center",
     fontSize: 30,
   },

@@ -20,19 +20,19 @@ const BeachForecastTab = () => {
     <View style={styles.container}>
       <View style={styles.tableHeading}>
         <View style={styles.hourHeading}>
-          <Text style={commonStyles.cardHeading}>Hour</Text>
+          <Text style={styles.tableHeadingText}>Hour</Text>
         </View>
 
         <View style={styles.temperatureHeading}>
-          <Text style={commonStyles.cardHeading}>Temp</Text>
+          <Text style={styles.tableHeadingText}>Temp</Text>
         </View>
 
         <View style={styles.windHeading}>
-          <Text style={commonStyles.cardHeading}>Wind</Text>
+          <Text style={styles.tableHeadingText}>Wind</Text>
         </View>
 
         <View style={styles.swellHeading}>
-          <Text style={commonStyles.cardHeading}>Swell</Text>
+          <Text style={styles.tableHeadingText}>Swell</Text>
         </View>
       </View>
 
@@ -47,16 +47,24 @@ const styles = StyleSheet.create({
   },
   tableHeading: {
     height: 30,
-    backgroundColor: "#d4f2ff",
+    backgroundColor: "#0527cb",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    borderBottomColor: "#0527cb",
+    borderBottomColor: "#fff",
     borderBottomWidth: 2,
+    marginTop: 5,
+  },
+  tableHeadingText: {
+    fontSize: 16,
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#fff",
   },
   hourHeading: {
     paddingLeft: 25,
     flex: 0.15,
+    color: "#fff",
   },
   temperatureHeading: {
     flex: 0.15,
