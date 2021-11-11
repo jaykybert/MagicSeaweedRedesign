@@ -1,7 +1,6 @@
 /**
- * @file styles.js
- * A file containing common styles used throughout
- * the application.
+ * @file commonStyles.js
+ * A file containing common styles used throughout the application.
  */
 
 // React

@@ -2,7 +2,6 @@
 import React from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 // Components
-import EmptyComponent from "../shared/EmptyComponent";
 import BeachMediaTab from "../screens/BeachMediaTab";
 import BeachTodayTab from "../screens/BeachTodayTab";
 import BeachForecastTab from "../screens/BeachForecastTab";
@@ -11,13 +10,12 @@ const BeachTabs = createMaterialTopTabNavigator();
 
 /**
  * @function BeachScreenTabs
- * A top tab navigator with 3 tabs:
- *      > Media (left) for video and images.
- *      > Overview (centre) for information about the beach today.
- *      > Forecast (right) for information about the beach for the next week.
+ * A top tab navigator accessed from HomescreenStack with 3 tabs:
+ *      > BeachMediaTab (left) for video and images.
+ *      > BeachTodayTab (centre) for information about the beach today.
+ *      > BeachForecastTab (right) for information about the beach for the next several days.
  *
  * @param {route} - Used to pass the beach name.
- * @returns BeachScreenTabs Component
  */
 const BeachScreenTabs = ({ route }) => {
   return (

@@ -1,5 +1,11 @@
+/**
+ * @file BeachTodayTab.js
+ * Contains the BeachTodayTab component, relevant styles, and function calls
+ * for getting the MSW API and openweathermap API data.
+ */
+
 // React
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 // Components
@@ -7,36 +13,36 @@ import InfoCard from "../shared/InfoCard";
 import TideChart from "../components/TideChart";
 import WindChart from "../components/WindChart";
 // Utilites
-import commonStyles from "../static/styles";
-import { GetDummyApiData } from "../scripts/mswData";
-import GetWeatherData from "../scripts/weatherData";
+import commonStyles from "../static/commonStyles";
+import { GetMSWApiData } from "../scripts/mswData";
 import GetDummyWeatherData from "../scripts/dummyWeatherData";
 
-let mswData = GetDummyApiData();
+let mswData = GetMSWApiData();
 let weatherData = GetDummyWeatherData();
 
 /**
  * @function BeachTodayTab
- * Screen for displaying information about the beach today.
- * Contains temperature, wind, and surf information.
+ * Displays information about the beach today using the MSW data.
+ *    > Contains a temperature, wind, and swell overview.
+ *    > Contains a tide chart and wind chart for the day.
+ *    > Contains advertisement space at the bottom.
  *
  * @param {beachName}
- * @returns BeachTodayTab Component
  */
 const BeachTodayTab = ({ beachName }) => {
   return (
     <ScrollView style={{ backgroundColor: "#d4f2ff" }}>
       <View>
-        <Text style={todayStyles.cardLargeText}>
+        <Text style={styles.cardLargeText}>
           {beachName}, {mswData[0]["day"]}
         </Text>
 
-        <View style={todayStyles.adjacentCards}>
+        <View style={styles.adjacentCards}>
           <InfoCard>
             <Text style={commonStyles.cardHeading}>Weather</Text>
 
             <Image
-              source={require(`../assets/weatherIcons/04n.png`)}
+              source={require(`../assets/openWeatherIcons/04n.png`)}
               style={{ width: 100, height: 100 }}
             />
 
@@ -44,11 +50,11 @@ const BeachTodayTab = ({ beachName }) => {
               {weatherData["weather"][0]["description"]}
             </Text>
 
-            <View style={todayStyles.formatUnits}>
-              <Text style={todayStyles.cardLargeText}>
+            <View style={styles.formatUnits}>
+              <Text style={styles.cardLargeText}>
                 {Math.round(weatherData["main"]["temp"])}
               </Text>
-              <Text style={todayStyles}>°C</Text>
+              <Text style={styles}>°C</Text>
             </View>
 
             <Text style={commonStyles.subHeading}>
@@ -76,12 +82,12 @@ const BeachTodayTab = ({ beachName }) => {
                 {mswData[0]["wind"]["direction"]}°
               </Text>
 
-              <View style={todayStyles.formatUnits}>
-                <Text style={todayStyles.cardLargeText}>
+              <View style={styles.formatUnits}>
+                <Text style={styles.cardLargeText}>
                   {mswData[0]["wind"]["speed"]}
                 </Text>
 
-                <Text style={todayStyles}>{mswData[0]["wind"]["unit"]}</Text>
+                <Text style={styles}>{mswData[0]["wind"]["unit"]}</Text>
               </View>
             </View>
           </InfoCard>
@@ -117,8 +123,8 @@ const BeachTodayTab = ({ beachName }) => {
                 )}
                 °
               </Text>
-              <View style={todayStyles.formatUnits}>
-                <Text style={todayStyles.cardLargeText}>
+              <View style={styles.formatUnits}>
+                <Text style={styles.cardLargeText}>
                   {mswData[0]["swell"]["components"]["primary"]["height"]}
                 </Text>
                 <Text> {mswData[0]["swell"]["unit"]}</Text>
@@ -140,17 +146,16 @@ const BeachTodayTab = ({ beachName }) => {
         </InfoCard>
 
         <InfoCard>
-          <View style={todayStyles.advertisement}></View>
-          <Text style={{ alignItems: "center", justifyContent: "center" }}>
-            Ad Space
-          </Text>
+          <View style={styles.advertisement}>
+            <Text style={{ textAlign: "center" }}>Ad Space</Text>
+          </View>
         </InfoCard>
       </View>
     </ScrollView>
   );
 };
 
-const todayStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   advertisement: {
     alignItems: "center",
     height: 150,

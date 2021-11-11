@@ -1,21 +1,32 @@
+/**
+ * @file HourlyForecastListItem.js
+ * Contains the HourlyForecastListItem component and relevant styles.
+ */
+
 // React
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
+/**
+ * @function HourlyForecastListItem
+ * Displays hourly forecast information inside a singular row.
+ *
+ * @param {forecastHour} - Forecast data (temp, wind, swell) for a specific hour of a specific day.
+ */
 const HourlyForecastListItem = ({ forecastHour }) => {
   return (
-    <View style={Styles.row}>
-      <View style={Styles.hour}>
+    <View style={styles.row}>
+      <View style={styles.hour}>
         <Text>{forecastHour["hour"]}</Text>
       </View>
 
-      <View style={Styles.temperature}>
+      <View style={styles.temperature}>
         <Text>{forecastHour["condition"]["temperature"]}</Text>
         <Text>°{forecastHour["condition"]["unit"].toUpperCase()}</Text>
       </View>
 
-      <View style={Styles.wind}>
+      <View style={styles.wind}>
         <MaterialCommunityIcons
           name="arrow-down-bold"
           size={40}
@@ -31,7 +42,7 @@ const HourlyForecastListItem = ({ forecastHour }) => {
         </Text>
       </View>
 
-      <View style={Styles.swell}>
+      <View style={styles.swell}>
         <MaterialCommunityIcons
           name="arrow-down-bold"
           size={40}
@@ -50,9 +61,8 @@ const HourlyForecastListItem = ({ forecastHour }) => {
   );
 };
 
-const Styles = StyleSheet.create({
+const styles = StyleSheet.create({
   row: {
-    borderRadius: 5,
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
@@ -63,7 +73,7 @@ const Styles = StyleSheet.create({
   hour: {
     justifyContent: "center",
     flexDirection: "row",
-    flex: 0.1,
+    flex: 0.2,
     paddingLeft: 5,
   },
   temperature: {
@@ -74,13 +84,13 @@ const Styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
-    flex: 0.35,
+    flex: 0.3,
   },
   swell: {
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
-    flex: 0.7,
+    flex: 0.6,
   },
 });
 

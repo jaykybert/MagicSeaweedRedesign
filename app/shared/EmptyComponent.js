@@ -1,22 +1,20 @@
 // React
 import React from "react";
-import { Text, StyleSheet, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 /**
  * @function EmptyComponent
- * An empty placeholder component used to flesh out navigation.
- *
- * @return EmptyComponent Component
+ * A placeholder component used to flesh out navigation.
  */
-function EmptyComponent() {
+const EmptyComponent = () => {
   return (
-    <View style={EmptyComponentStyles.Empty}>
+    <View style={styles.Empty}>
       <Text>...</Text>
     </View>
   );
-}
+};
 
-const EmptyComponentStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   Empty: {
     flex: 1,
     alignItems: "center",

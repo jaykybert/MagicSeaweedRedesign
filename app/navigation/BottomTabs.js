@@ -11,11 +11,9 @@ const Root = createMaterialBottomTabNavigator();
 /**
  * @function BottomTabs
  * Navigation component nested within HomescreenStack. Contains 3 screens:
- *    > News (left) - using EmptyComponent
- *    > TopTabs (centre)
- *    > Account (right) - using EmptyComponent
- *
- * @returns BottomTabs Component
+ *    > News (left) using EmptyComponent
+ *    > TopTabs (centre) for displaying the beaches.
+ *    > Account (right) using EmptyComponent
  */
 const BottomTabs = () => {
   return (

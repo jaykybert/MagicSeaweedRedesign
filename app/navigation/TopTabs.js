@@ -10,12 +10,12 @@ const Tabs = createMaterialTopTabNavigator();
 /**
  * @function TopTabs
  * Navigation component nested within BottomTabs.
+ * Displays the same BeachList component for both Nearby and Pinned tabs.
  * Contains 3 screens:
  *    > BeachesMap (left) - using EmptyComponent
  *    > BeachList (centre)
  *    > BeachList (right)
  *
- * @returns TopTabs Component
  */
 const TopTabs = () => {
   return (

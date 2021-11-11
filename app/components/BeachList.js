@@ -1,6 +1,7 @@
-/** @file BeachList.js
- *  Contains the BeachList component, BeachList styles, and the function
- *  call for getting the (dummy) location data.
+/**
+ * @file BeachList.js
+ * Contains the BeachList component, relevant styles, and the function
+ * call for getting the (dummy) location data.
  */
 
 // React
@@ -14,14 +15,14 @@ import GetLocationData from "../scripts/locationData";
 let beachData = GetLocationData();
 
 /**
- * A FlatList of BeachListItems.
+ * @function BeachList
+ * Displays a FlatList of BeachListItems using the (dummy) location data.
  *
  * @param {navigation} - Stack navigation for displaying the beach screen tabs.
- * @returns BeachList Component
  */
 const BeachList = ({ navigation }) => {
   return (
-    <View style={BeachListStyles.container}>
+    <View style={styles.container}>
       <FlatList
         data={beachData}
         keyExtractor={(item) => item.id}
@@ -38,7 +39,7 @@ const BeachList = ({ navigation }) => {
   );
 };
 
-const BeachListStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#d4f2ff",

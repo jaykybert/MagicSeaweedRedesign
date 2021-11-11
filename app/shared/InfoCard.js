@@ -8,17 +8,16 @@ import { StyleSheet, View } from "react-native";
  * Used inside BeachTodayTab.
  *
  * @param {children} - The content to be nested inside of the InfoCard component.
- * @returns InfoCard Component.
  */
 const InfoCard = ({ children }) => {
   return (
-    <View style={InfoCardStyles.card}>
+    <View style={styles.card}>
       <View>{children}</View>
     </View>
   );
 };
 
-const InfoCardStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   card: {
     alignItems: "center",
     backgroundColor: "#fff",

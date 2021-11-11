@@ -4,11 +4,9 @@ import { Image, View } from "react-native";
 
 /**
  * @function Header
- * A custom header for the application that contains the MagicSeaweed logo.
- *
- * @returns Header Component
+ * A custom header for the application that contains the Magicseaweed logo.
  */
-function Header() {
+const Header = () => {
   return (
     <View>
       <Image
@@ -17,6 +15,6 @@ function Header() {
       />
     </View>
   );
-}
+};
 
 export default Header;

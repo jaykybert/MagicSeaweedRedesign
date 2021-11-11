@@ -1,14 +1,17 @@
-import { PROVIDER_GOOGLE } from "react-native-maps";
+/**
+ * @file mswData.js
+ * Contains several functions for iterating through the MSW API data and formatting it.
+ */
 
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 /**
- * @function GetDummyApiData
- * Create an id, date, and formatted date for every object in the array of data.
- * Then return the data.
- * @returns {data} - Dummy data with additional, generated data.
+ * @function GetMSWApiData
+ * Create an id, date, and formatted date for every object in the array of data and then return it.
+ * Used inside the BeachTodayTab component.
+ * @returns {data}
  */
-export function GetDummyApiData() {
+export function GetMSWApiData() {
   // API call would go here.
   for (let i = 0; i < data.length; i++) {
     data[i]["id"] = i;
@@ -22,13 +25,14 @@ export function GetDummyApiData() {
 
 /**
  * @function GetTideData
- * Return an array of objects that are all on the same day (from the dummy data).
+ * Return an array of objects that are all on the same day (from the MSW data).
  * @returns {tideData} - An array of objects containing an x (time) and a y (tide height) property.
  */
 export function GetTideData() {
   let tideData = [];
   for (let i = 0; i < data.length; i++) {
     data[i]["date"] = new Date(data[i]["timestamp"] * 1000);
+    // Add to array if object is still on the same day.
     if (data[i]["date"].getDate() === data[0]["date"].getDate()) {
       tideData.push({
         x: data[i]["date"].getHours(),
@@ -43,13 +47,14 @@ export function GetTideData() {
 
 /**
  * @function GetWindData
- *
- * @returns {windData}
+ * Return an array of objects that are all on the same day (from the MSW data).
+ * @returns {windData} - An array of objects containing an x (time) and a y (wind speed) property.
  */
 export function GetWindData() {
   let windData = [];
   for (let i = 0; i < data.length; i++) {
     data[i]["date"] = new Date(data[i]["timestamp"] * 1000);
+    // Add to array if object is still on the same day.
     if (data[i]["date"].getDate() === data[0]["date"].getDate()) {
       windData.push({
         x: data[i]["date"].getHours(),
@@ -64,8 +69,8 @@ export function GetWindData() {
 
 /**
  * @function GetForecastData
- *
- * @return {forecastData}
+ * Return forecast data for the next several days.
+ * @return {forecastData} - an array of objects for every subsequent day. Each day contains an array for hour-specific information.
  */
 export function GetForecastData() {
   let forecastData = [];
@@ -77,15 +82,15 @@ export function GetForecastData() {
       "date"
     ].getDate()}`;
 
-    // Ignore 'Today'
+    // Ignore 'Today' (first day of MSW data).
     if (data[i]["day"] === data[0]["day"]) {
       continue;
     }
 
     let hour = data[i]["date"].getHours();
 
+    // Ignore anything before 4am or after 11pm.
     if (hour < 4 || hour > 21) {
-      // Ignore anything before 4am or after 11pm.
       continue;
     }
 
@@ -98,6 +103,7 @@ export function GetForecastData() {
       forecastData[forecastData.length - 1]["id"] = forecastData.length - 1;
     }
 
+    // Add to the object using MSW data.
     forecastData[forecastData.length - 1]["forecast"].push({
       hour: hour,
       wind: {

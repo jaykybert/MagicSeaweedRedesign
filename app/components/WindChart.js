@@ -1,6 +1,7 @@
-/** @file WindChart.js
+/**
+ * @file WindChart.js
  * Contains the WindChart component and the
- * function call for getting the (dummy) wind data.
+ * function call for getting the wind data from the MSW API.
  */
 
 // React
@@ -14,7 +15,7 @@ import {
   VictoryTheme,
 } from "victory-native";
 // Utilities
-import commonStyles from "../static/styles";
+import commonStyles from "../static/commonStyles";
 import { GetWindData } from "../scripts/mswData";
 
 const windData = GetWindData();
@@ -23,10 +24,10 @@ const maxSpeed = Math.max(...windData.map((datum) => datum.y));
 const minSpeed = Math.min(...windData.map((datum) => datum.y));
 
 let formattedTime = [3, 6, 9, 12, 15, 18, 21];
+
 /**
  * @function WindChart
- * A chart for displaying the temperature against time for the current day (using dummy data.)
- * @returns WindChart Component
+ * A chart for displaying the wind speed (mph) against time (hour) for the current day (using the MSW API data).
  */
 const WindChart = () => {
   return (

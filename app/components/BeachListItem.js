@@ -1,5 +1,6 @@
-/** @file BeachListItem.js
- *  Contains the BeachListItem component and relevant styles.
+/**
+ * @file BeachListItem.js
+ * Contains the BeachListItem component and relevant styles.
  */
 
 // React
@@ -8,30 +9,29 @@ import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 /**
- * Represents a single, clickable beach. Found inside BeachListItem.
+ * @function BeachListItem
+ * Represents a single, clickable beach. Found inside BeachList.
  *
- * @param {beachItem} - (Dummy) Object relevant to a beach. Contains an id, name, and relative distance.
- * @param {onPress}  - BeachList's onPress is called through BeachListItem's onPress.
- *
- * @returns BeachListItem Component
+ * @param {beachItem} - (Dummy) Object relevant to a beach. Contains an id, name, and the distance to it.
+ * @param {onPress}  - BeachList's onPress is passed as a prop to BeachListItem and called inside its onPress.
  */
 const BeachListItem = ({ beachItem, onPress }) => {
   return (
-    <View style={Styles.container}>
+    <View style={styles.container}>
       <TouchableHighlight
-        style={Styles.rowItem}
+        style={styles.rowItem}
         activeOpacity={0.4}
         underlayColor="#fff"
         onPress={onPress}
       >
         <View>
-          <Text style={Styles.heading}>{beachItem["name"].toUpperCase()}</Text>
-          <Text style={Styles.distance}>
+          <Text style={styles.heading}>{beachItem["name"].toUpperCase()}</Text>
+          <Text style={styles.distance}>
             {beachItem["distanceMiles"]} miles
           </Text>
 
           <TouchableHighlight
-            style={Styles.pinIcon}
+            style={styles.pinIcon}
             activeOpacity={0.4}
             underlayColor="#fff"
             onPress={onPinPress}
@@ -48,7 +48,7 @@ function onPinPress() {
   alert("Beach Pinned!\n(Not Implemented)");
 }
 
-const Styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     marginHorizontal: 10,
     marginTop: 5,

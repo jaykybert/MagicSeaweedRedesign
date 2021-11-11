@@ -1,8 +1,11 @@
-const GetDummyWeatherData = () => {
+/**
+ * @function GetDummyWeatherData
+ * Return the current weather data (hard-coded) from the openweathermap API.
+ * @returns {data}
+ */
+export default function GetDummyWeatherData() {
   return data;
-};
-
-export default GetDummyWeatherData;
+}
 
 // ---------- Weather Dummmy Data ---------- //
 

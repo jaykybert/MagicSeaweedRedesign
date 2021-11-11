@@ -1,35 +1,36 @@
+/**
+ * @file BeachMediaTab.js
+ * Contains the BeachMediaTab component and relevant styles.
+ */
+
 // React & Navigation
 import React from "react";
 import { StyleSheet, Text, Image, View } from "react-native";
-import Video from "react-native-video";
 
 /**
  * @function BeachMediaTab
- * Screen for displaying media related to the beach - images, videos, beach webcam, etc.
- * @returns BeachMediaTab Component
+ * Displays media related to the beach - images, videos, beach webcam, etc.
+ * This screen is purely a prototype - the beachcam is a static image.
  */
 const BeachMediaTab = () => {
   return (
-    <View style={BeachMediaTabStyles.container}>
+    <View style={styles.container}>
       <View>
-        <View style={BeachMediaTabStyles.heading}>
-          <Text style={BeachMediaTabStyles.headingText}>Beachcam</Text>
+        <View style={styles.heading}>
+          <Text style={styles.headingText}>Beachcam</Text>
         </View>
       </View>
-      <Image
-        source={require("../assets/video.jpg")}
-        style={BeachMediaTabStyles.video}
-      />
+      <Image source={require("../assets/video.jpg")} style={styles.video} />
       <View>
-        <View style={BeachMediaTabStyles.heading}>
-          <Text style={BeachMediaTabStyles.headingText}>Gallery</Text>
+        <View style={styles.heading}>
+          <Text style={styles.headingText}>Gallery</Text>
         </View>
       </View>
     </View>
   );
 };
 
-const BeachMediaTabStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
   },

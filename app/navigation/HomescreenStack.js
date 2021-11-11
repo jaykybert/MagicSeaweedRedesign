@@ -10,12 +10,10 @@ const homeStack = createNativeStackNavigator();
 
 /**
  * @function HomescreenStack
- * Outermost navigation component.
+ * Outermost navigation component. Contains a custom header.
  * Contains two screens:
- *      > BottomTabs - nested navigation used for beach lists.
+ *      > BottomTabs - nested navigation used for displaying beaches.
  *      > BeachScreenTabs - used for displaying specific beach information.
- *
- * @returns HomescreenStack Component
  */
 const HomescreenStack = () => {
   return (

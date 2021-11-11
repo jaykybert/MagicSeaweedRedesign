@@ -1,24 +1,25 @@
-/** @file TideChart.js
+/**
+ * @file TideChart.js
  * Contains the TideChart component and the
- * function call for getting the (dummy) tide data.
+ * function call for getting the tide data from the MSW API.
  */
 
 // React
 import React from "react";
 import { Text, View } from "react-native";
 // Charts
-import { VictoryArea, VictoryAxis, VictoryChart } from "victory-native";
+import { VictoryArea, VictoryChart, VictoryAxis } from "victory-native";
 // Utilities
-import commonStyles from "../static/styles";
+import commonStyles from "../static/commonStyles";
 import { GetTideData } from "../scripts/mswData";
 
 const tideData = GetTideData();
 
 let formattedTime = [3, 6, 9, 12, 15, 18, 21];
+
 /**
  * @function TideChart
- * A chart for displaying the tide against time for the current day (using dummy data.)
- * @returns TideChart Component
+ * A chart for displaying the tide (metres) against time (hour) for the current day (using the MSW API data).
  */
 const TideChart = () => {
   return (
