@@ -162,7 +162,6 @@ const BeachTodayTab = ({ beachName }) => {
 
 const styles = StyleSheet.create({
   advertisement: {
-    alignItems: "center",
     height: 150,
   },
   cardLargeText: {
